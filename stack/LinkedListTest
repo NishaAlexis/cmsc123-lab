@@ -1,0 +1,34 @@
+import junit.framework.TestCase;
+
+public class LinkedListTest extends TestCase {
+  
+  public void testAdd() {
+    LinkedList<Integer> list = new LinkedList<Integer>();
+    
+    assertEquals(true, list.add(1));
+    assertEquals(true, list.add(3));
+    assertEquals(true, list.add(5));
+  }
+  
+  public void testRemove() {
+    LinkedList<Integer> list = new LinkedList<Integer>();
+    
+    list.add(1);
+    list.add(3);
+    list.add(5);
+    
+    assertEquals(true, list.remove(2));
+  }
+  
+  public void testHasNext() {
+    LinkedList<Integer> list = new LinkedList<Integer>();
+    
+    list.add(1);
+    list.add(3);
+    list.add(5);
+    
+    Iterator iterator = list.iterator();
+    
+    assertEquals(true, iterator.hasNext());
+  } 
+}
