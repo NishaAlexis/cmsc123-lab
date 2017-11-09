@@ -10,7 +10,7 @@ public class QueueTester {
     System.out.println("Empty? " + q.isEmpty());
     System.out.println("Peek: " + q.peek());
     System.out.println("Removed: " + q.dequeue());
-    q.peek();
+    System.out.println("Peek: " + q.peek());
     System.out.println("Size = " + q.size());
   }
 }
