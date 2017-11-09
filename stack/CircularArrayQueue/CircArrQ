@@ -1,0 +1,67 @@
+import java.util.NoSuchElementException;
+
+public class CircArrQ {
+  Object[] arr;
+  int resizeFactor = 2;
+  int currentSize;
+  int back, front;
+  int max;
+
+  public CircArrQ(int max) {
+    this.max = max;
+    this.arr = new Object[max];
+    this.currentSize = 0;
+    this.front = 0;
+    this.back = 0;
+  }
+    
+  public void enqueue(int item) {
+    if (currentSize == arr.length) {
+      if (((back - front) == -1) || (back - front) == (currentSize - 1)) {
+        int newSize = (int)(arr.length * resizeFactor);
+        Object[] newArr = (Object[]) new Object[newSize];
+        
+        for (int k = front; k <= back; k++) {
+          newArr[k - front] = arr[k % arr.length];
+        }
+      
+        arr = newArr;
+        front = item;
+        back = currentSize - 1;
+        arr[currentSize] = arr[newSize];
+      }
+    }
+    if (currentSize == 0){ 
+      front++;
+    }
+    
+    arr[back] = item;
+    back = (back + 1) % this.max;
+    currentSize++; 
+  }
+  
+  public Object dequeue() {
+    if(!isEmpty()) {
+      Object item = arr[front - 1];
+      arr[front - 1] = front;
+      front = (front + 1) % currentSize;
+      return item;
+    }
+    throw new NoSuchElementException();
+  }
+  
+  public Object peek() {
+    if (!isEmpty()) {
+      return arr[front - 1];
+    }
+    return null;
+  }
+  
+  public boolean isEmpty() {
+    return currentSize == 0;
+  }
+  
+  public int size() {
+    return currentSize;
+  }
+}
