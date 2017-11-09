@@ -1,0 +1,16 @@
+public class QueueTester {
+  public static void main(String [] args){
+    CircArrQ q = new CircArrQ(10);
+    System.out.println("Empty? " + q.isEmpty());
+    q.enqueue(1);
+    q.enqueue(2);
+    q.enqueue(3);
+    q.enqueue(4);
+    q.enqueue(5);
+    System.out.println("Empty? " + q.isEmpty());
+    System.out.println("Peek: " + q.peek());
+    System.out.println("Removed: " + q.dequeue());
+    q.peek();
+    System.out.println("Size = " + q.size());
+  }
+}
