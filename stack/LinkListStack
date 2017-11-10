@@ -1,0 +1,32 @@
+public class LinkListStack<E> {
+  LinkedList<E> items;
+  public LinkListStack() {
+    items = new LinkedList();
+  }
+  
+  public void push(E item) {
+    items.add(item);
+  }
+  //still shows error
+  public E pop(){
+    if (items.size > 0) {
+      E item = items.remove(size-1);
+      return item;
+    }
+    throw new Exception();
+  }
+  //still shows error
+  public E peek(){
+    if (!isEmpty) {
+      item = items.get(size-1)
+      return item;
+    }
+    throw new Exception();
+  }
+  public boolean isEmpty(){
+    return (items.size == 0);
+  }
+  public int size(){
+    return items.size;
+  }
+}
