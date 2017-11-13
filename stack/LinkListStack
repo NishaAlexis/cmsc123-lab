@@ -7,7 +7,7 @@ public class LinkListStack<E> {
   public void push(E item) {
     items.add(item);
   }
-  //still shows error
+  //still shows few errors
   public E pop(){
     if (items.size > 0) {
       E item = items.remove(size-1);
@@ -15,7 +15,7 @@ public class LinkListStack<E> {
     }
     throw new Exception();
   }
-  //still shows error
+  //still shows few errors
   public E peek(){
     if (!isEmpty) {
       item = items.get(size-1)
