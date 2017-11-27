@@ -1,4 +1,3 @@
-import java.util.List;
 import java.lang.Integer;
 
 class HashTable {
@@ -77,17 +76,15 @@ class HashTable {
   //returns the value with the given key. Return null if the key does not exist.
   int get(String key) {
     int hash = (indexOf(key) % TABLESIZE);
-    if (table[hash] != null) {
-      LinkedHash curr = table[hash];
-      while (curr != null && curr.getKey() != key) {
+    LinkedHash curr = table[hash];
+    if (curr == null) {
+      return Integer.parseInt(null);
+    } else {
+      while (curr.getKey() != key) {
         curr = curr.getNext();
       }
-      if (curr == null) {
-        return -1;
-      } else
-        return curr.getValue();
-    }
-    return Integer.parseInt(null);
+      return curr.getValue();
+    }  
   }
   
   //removes the value associated with the key and returns it. Return null if the key does not exist
@@ -131,25 +128,29 @@ class HashTable {
   }
   
   //returns a list of all values in the data structure
-  void values() {
+  int[] values() {
+    int[] list = new int[TABLESIZE];
     for (int i = 0; i < TABLESIZE; i++) {
       LinkedHash curr = table[i];
-      while (curr != null) {
-        System.out.print(curr.value + " -> ");
+      for (int j = 0; curr != null; j++) {
+        list[j] = curr.getValue();  
         curr = curr.getNext();
       }
     }
+    return list;
   }
   
   //returns a list of all keys in the data structure
-  void keys() {
+  String[] keys() {
+    String[] list = new String[TABLESIZE];
     for (int i = 0; i < TABLESIZE; i++) {
       LinkedHash curr = table[i];
-      while (curr != null) {
-        System.out.print(curr.key + " -> ");
+      for (int j = 0; curr != null; j++) {
+        list[j] = curr.getKey();
         curr = curr.getNext();
       }
     }
+    return list;
   }
 }
 
