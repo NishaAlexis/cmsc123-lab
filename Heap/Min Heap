@@ -1,0 +1,155 @@
+//Min Heap
+//The heap should have a max capacity which is a parameter in the constructor
+//Implement the tree using an array
+//The heap should accept integers
+
+class MinHeap {
+  int[] heap;
+  int size;
+  int maxSize;
+  final int FRONT = 1;
+  
+  MinHeap(int maxSize) {
+    this.maxSize = maxSize;
+    this.size = 0;
+    heap = new int[this.maxSize];
+    
+  }
+  
+  int parent(int num) {
+    return num / 2;
+  }
+  
+  int leftChild(int num) {
+    return 2 * num;
+  }
+  
+  int rightChild(int num) {
+    return (2 * num) + 1;
+  }
+  
+  boolean isLeaf(int num) {
+    if (num >= (size / 2) && num <= size) {
+      return true;
+    }
+    return false;
+  }
+  
+  //swaps two numbers in the heap
+  void swap(int fnum, int snum) {
+    int temp;
+    temp = heap[fnum];
+    heap[fnum] = heap[snum];
+    heap[snum] = temp;
+  }
+  
+  //inserts the value into the heap
+  void add(int value) {
+    heap[++size] = value;
+    int curr = size;
+    
+    while (heap[curr] < heap[parent(curr)]) {
+      swap(curr, parent(curr));
+      curr = parent(curr);
+    }
+  }
+  
+  void heapify(int num) {
+    if (!isLeaf(num)) {
+      if (heap[num] > heap[leftChild(num)] || heap[num] > heap[rightChild(num)]) {
+        if (heap[leftChild(num)] < heap[rightChild(num)]) {
+          swap(num, leftChild(num));
+          heapify(leftChild(num));
+        }
+        swap(num, rightChild(num));
+        heapify(rightChild(num));
+      }
+    }
+  }
+  
+  //removes the smallest value in the heap and returns it
+  int remove() {
+    int pop = heap[FRONT];
+    heap[FRONT] = heap[size--];
+    heapify(FRONT);
+    return pop;
+  }
+  
+  void minHeap() {
+    for (int num = (size / 2); num >= 1; num--) {
+      heapify(num);
+    }
+  }
+ 
+  //prints the values in inorder traversal
+  void inorder() {
+    int n = 1;
+    printInorder(n);
+    System.out.println("");
+  }
+  
+  //helper method for inorder()
+  void printInorder(int num) {
+    if (num > size) {
+      return;
+    }
+    printInorder(leftChild(num));
+    System.out.print(heap[num] + ", ");
+    printInorder(rightChild(num));
+  }
+  
+  //prints tha values in preorder traversal
+  void preorder() {
+    int n = 1;
+    printPreorder(n);
+    System.out.println("");
+  }
+  
+  //helper method for preorder()
+  void printPreorder(int num) {
+    if (num > size) {
+      return;
+    }
+    System.out.print(heap[num] + ", ");
+    printPreorder(leftChild(num));
+    printPreorder(rightChild(num));
+  }
+
+  //prints the values in postorder traversal
+  void postorder() {
+    int n = 1;
+    printPostorder(n);
+    System.out.println("");
+  }
+  
+  //helper method for postorder()
+  void printPostorder(int num) {
+    if (num > size) {
+      return;
+    }
+    printPostorder(leftChild(num));
+    printPostorder(rightChild(num));
+    System.out.print(heap[num] + ", ");
+  }
+  
+  public static void main(String... args) {
+    System.out.println("The Min Heap is ");
+    MinHeap minHeap = new MinHeap(20);
+    minHeap.add(5);
+    minHeap.add(3);
+    minHeap.add(17);
+    minHeap.add(10);
+    minHeap.add(84);
+    minHeap.add(19);
+    minHeap.add(6);
+    minHeap.add(22);
+    minHeap.add(9);
+    minHeap.minHeap();
+    minHeap.inorder();
+    minHeap.preorder();
+    minHeap.postorder();
+
+    
+    System.out.println("The Min val is " + minHeap.remove());
+ }
+}
